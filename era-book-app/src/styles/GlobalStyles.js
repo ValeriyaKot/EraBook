@@ -10,9 +10,9 @@ export const MainButton = ({ onPress, children, style }) => {
     );
 };
 
-export const ChooseButton = ({ label, isSelected, onSelect }) => {
+export const ChooseButton = ({ label, isSelected, onSelect, style }) => {
     return (
-        <TouchableOpacity style={[styles.option, isSelected ? styles.activeOption : null]} onPress={onSelect}>
+        <TouchableOpacity style={[styles.option, style, isSelected ? styles.activeOption : null]} onPress={onSelect}>
             <Text style={styles.optionText}>{label}</Text>
         </TouchableOpacity>
     );

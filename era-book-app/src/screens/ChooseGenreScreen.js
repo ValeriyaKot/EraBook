@@ -1,51 +1,51 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { MainButton, ChooseButton } from '../styles/GlobalStyles.js'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { MainButton, ChooseButton } from '../styles/GlobalStyles.js';
 
-
-const ChooseAgeScreen = ({ navigation }) => {
-
-    const [selectedOption, setSelectedOption] = useState(null);
+const ChooseGenreScreen = ({ navigation }) => {
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     const options = [
-        { id: 1, label: '14-17' },
-        { id: 2, label: '18-24' },
-        { id: 3, label: '25-29' },
-        { id: 4, label: '30-34' },
-        { id: 5, label: '35-39' },
-        { id: 7, label: '40-44' },
-        { id: 8, label: '45-49' },
-        { id: 9, label: '>50' },
+        { id: 1, label: 'Fiction' },
+        { id: 2, label: 'Non-fiction' },
+        { id: 3, label: 'Mystery' },
+        { id: 4, label: 'Fantasy' },
+        { id: 5, label: 'Sci-fi' },
+        { id: 6, label: 'Romance' },
+        { id: 7, label: 'Biography' },
+        { id: 8, label: 'History' },
     ];
 
     const handleOptionSelect = (id) => {
-        setSelectedOption(id);
+        if (selectedOptions.includes(id)) {
+            setSelectedOptions(selectedOptions.filter(option => option !== id));
+        } else {
+            setSelectedOptions([...selectedOptions, id]);
+        }
     };
 
     return (
         <View style={styles.mainContainer}>
-
             <View style={styles.container}>
-                <Text style={styles.title}>Choose your age?</Text>
-                <Text style={styles.text}>Select age range for better content</Text>
+                <Text style={styles.title}>Choose the book genre you like?</Text>
+                <Text style={styles.text}>Select your preferred book genre for better recommendations</Text>
 
                 <View style={styles.buttonContainer}>
                     {options.map((item) => (
                         <View key={item.id} style={styles.buttonWrapper}>
                             <ChooseButton
                                 label={item.label}
-                                isSelected={selectedOption === item.id}
+                                isSelected={selectedOptions.includes(item.id)}
                                 onSelect={() => handleOptionSelect(item.id)}
+                                style={styles.customButton}
                             />
                         </View>
                     ))}
                 </View>
-
             </View>
             <View style={styles.bottomContainer}>
                 <MainButton title="Continue" onPress={() => navigation.navigate('Choose Genre')}>Continue</MainButton>
             </View>
-
         </View>
     );
 };
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     container: {
         margin: 20,
         justifyContent: 'flex-start',
-        alignItems: 'baseline'
+        alignItems: 'baseline',
     },
     title: {
         fontSize: 30,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        marginVertical: 10
+        marginVertical: 10,
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -74,15 +74,19 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     buttonWrapper: {
-        width: '50%', 
-        marginHorizontal: 5 
+        marginHorizontal: 5
+    },
+    customButton: {
+        paddingHorizontal: 15,
+        borderRadius: 20,
+        alignSelf: 'flex-start',
     },
     bottomContainer: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginVertical: 20
+        marginVertical: 20,
     },
 });
 
-export default ChooseAgeScreen;
+export default ChooseGenreScreen;

@@ -7,6 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FirstScreen from './src/screens/FirstScreen.js';
 import ChooseGenderScreen from './src/screens/ChooseGenderScreen.js';
 import ChooseAgeScreen from './src/screens/ChoosAgeScreen.js';
+import ChooseGenreScreen from './src/screens/ChooseGenreScreen.js';
+
 
 
 const Stack = createStackNavigator();
@@ -28,6 +30,11 @@ const App = () => {
            <Stack.Screen
             name="Choose Age"
             component={ChooseAgeScreen}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Choose Genre"
+            component={ChooseGenreScreen}
             options={{ headerShown: true }}
           />
         </Stack.Navigator>
