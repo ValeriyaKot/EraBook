@@ -53,7 +53,7 @@ const ChooseGenderScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Log in')}>Continue</MainButton>
+                <MainButton title="Continue" onPress={() => navigation.navigate('Choose Age')}>Continue</MainButton>
             </View>
 
         </View>
