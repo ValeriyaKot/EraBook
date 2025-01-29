@@ -76,7 +76,7 @@ const FirstScreen = ({ navigation }) => {
                     </View>
                 </MainButton>
 
-                <MainButton title="Get started" onPress={() => navigation.navigate('Log in')}>Get started</MainButton>
+                <MainButton title="Get started" onPress={() => navigation.navigate('Choose Gender')}>Get started</MainButton>
                 <MainButton style={{ backgroundColor: '#FFF4E7' }} title="Log In" onPress={() => navigation.navigate('Log in')}>
                     <Text style={{ color: '#F89300', justifyContent: 'center' }}>I already have an account</Text>
                 </MainButton>

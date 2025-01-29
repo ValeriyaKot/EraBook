@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import FirstScreen from './src/screens/FirstScreen.js';
+import ChooseGenderScreen from './src/screens/ChooseGenderScreen.js';
 
 
 const Stack = createStackNavigator();
@@ -16,13 +17,13 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen
             options={{ headerShown: false }}
-            name="Pitch"
+            name="EraBook"
             component={FirstScreen} />
-          {/* <Stack.Screen
-            name="Home"
-            component={HomeTabNavigator}
-            options={{ headerShown: false }}
-          /> */}
+          <Stack.Screen
+            name="Choose Gender"
+            component={ChooseGenderScreen}
+            options={{ headerShown: true }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
   );

@@ -1,0 +1,11 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* предотвращает двойную прокрутку */
+}
+
+#root {
+    height: 100%;
+    overflow: auto; /* Важно для прокрутки на вебе */
+}
