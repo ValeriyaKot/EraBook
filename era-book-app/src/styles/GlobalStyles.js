@@ -18,7 +18,7 @@ export const ChooseButton = ({ label, isSelected, onSelect, style }) => {
     );
 };
 
-export const TextInputField = ({ label, placeholder, value, onChangeText, children }) => {
+export const TextInputField = ({ label, placeholder, value, onChangeText, secureTextEntry = false, children }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
@@ -32,6 +32,7 @@ export const TextInputField = ({ label, placeholder, value, onChangeText, childr
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 isFocused={isFocused}
+                secureTextEntry={secureTextEntry}
                 style={styles.inputForm}
             />
             <View style={styles.iconContainer}>{children}</View>
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         top: '50%',
-        transform: [{ translateY: -0 }],
+        transform: [{ translateY: 4 }],
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 1,
