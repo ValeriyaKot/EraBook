@@ -8,6 +8,7 @@ import FirstScreen from './src/screens/FirstScreen.js';
 import ChooseGenderScreen from './src/screens/ChooseGenderScreen.js';
 import ChooseAgeScreen from './src/screens/ChoosAgeScreen.js';
 import ChooseGenreScreen from './src/screens/ChooseGenreScreen.js';
+import CompleteProfileScreen from './src/screens/CompleteProfileScreen.js'
 
 
 
@@ -35,6 +36,11 @@ const App = () => {
           <Stack.Screen
             name="Choose Genre"
             component={ChooseGenreScreen}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Complete Profile"
+            component={CompleteProfileScreen}
             options={{ headerShown: true }}
           />
         </Stack.Navigator>

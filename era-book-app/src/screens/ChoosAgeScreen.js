@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     buttonWrapper: {
         width: '50%', 
-        marginHorizontal: 5 
+        paddingHorizontal: 5,
     },
     bottomContainer: {
         flex: 1,

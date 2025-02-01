@@ -44,7 +44,7 @@ const ChooseGenreScreen = ({ navigation }) => {
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Choose Genre')}>Continue</MainButton>
+                <MainButton title="Continue" onPress={() => navigation.navigate('Complete Profile')}>Continue</MainButton>
             </View>
         </View>
     );
