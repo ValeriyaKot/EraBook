@@ -1,5 +1,5 @@
-import React from 'react';
-import { Platform, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 
 
 export const MainButton = ({ onPress, children, style }) => {
@@ -15,6 +15,27 @@ export const ChooseButton = ({ label, isSelected, onSelect, style }) => {
         <TouchableOpacity style={[styles.option, style, isSelected ? styles.activeOption : null]} onPress={onSelect}>
             <Text style={styles.optionText}>{label}</Text>
         </TouchableOpacity>
+    );
+};
+
+export const TextInputField = ({ label, placeholder, value, onChangeText, children }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
+    return (
+        <View style={styles.textInputContainer}>
+            <Text style={styles.inputText}>{label}</Text>
+            <TextInput
+                placeholder={placeholder}
+                value={value}
+                onChangeText={onChangeText}
+                selectionColor="transparent"
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                isFocused={isFocused}
+                style={styles.inputForm}
+            />
+            <View style={styles.iconContainer}>{children}</View>
+        </View>
     );
 };
 
@@ -76,5 +97,32 @@ const styles = StyleSheet.create({
     optionText: {
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    textInputContainer: {
+        width: '100%',
+        marginBottom: 10,
+    },
+
+    inputText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingVertical: 5,
+    },
+    inputForm: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: '#F89300',
+        paddingVertical: 5,
+    },
+    iconContainer: {
+        position: 'absolute',
+        right: 0,
+        top: '50%',
+        transform: [{ translateY: -0 }],
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1,
     },
 });
