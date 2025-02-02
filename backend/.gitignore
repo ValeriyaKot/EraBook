@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+*.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django-related files
+db.sqlite3
+*.sqlite3
+*.log
+media/
+staticfiles/
+.env
+
+# VS Code settings
+.vscode/
+
+# IDEs and editors
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# PyCharm
+*.pyc
+*.pyo
+__pycache__/
