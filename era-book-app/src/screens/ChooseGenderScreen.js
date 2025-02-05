@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MainButton } from '../styles/GlobalStyles.js'
+import { UserDataContext } from "../context/UserDataContext";
 
 
 const OptionRadioButton = ({ label, isSelected, onSelect }) => {
@@ -22,17 +23,30 @@ const OptionRadioButton = ({ label, isSelected, onSelect }) => {
 
 
 const ChooseGenderScreen = ({ navigation }) => {
-
-    const [selectedOption, setSelectedOption] = useState(null);
+    const { userData, setUserData } = useContext(UserDataContext);
 
     const options = [
-        { id: 1, label: 'I am male' },
-        { id: 2, label: 'I am female' },
-        { id: 3, label: 'Rather not to say' },
+        { id: 1, label: 'I am male', value: 'Male' },
+        { id: 2, label: 'I am female', value: 'Female' },
+        { id: 3, label: 'Rather not to say', value: 'Other' },
     ];
 
+    const [selectedOption, setSelectedOption] = useState(
+        options.find(option => option.value === userData.gender)?.id || null
+    );
+
+
     const handleOptionSelect = (id) => {
+        const selectedGender = options.find(option => option.id === id)?.value;
         setSelectedOption(id);
+        setUserData(prevState => {
+            const newState = { ...prevState, gender: selectedGender };
+            return newState;
+        });
+    };
+
+    const handleContinue = () => {
+        navigation.navigate('Choose Age');
     };
 
     return (
@@ -53,7 +67,7 @@ const ChooseGenderScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Choose Age')}>Continue</MainButton>
+                <MainButton title="Continue" onPress={handleContinue}>Continue</MainButton>
             </View>
 
         </View>
