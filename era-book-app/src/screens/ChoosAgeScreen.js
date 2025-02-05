@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { MainButton, ChooseButton } from '../styles/GlobalStyles.js'
+import { UserDataContext } from "../context/UserDataContext";
 
 
 const ChooseAgeScreen = ({ navigation }) => {
 
-    const [selectedOption, setSelectedOption] = useState(null);
+    const { userData, setUserData } = useContext(UserDataContext);
 
     const options = [
         { id: 1, label: '14-17' },
@@ -18,8 +19,21 @@ const ChooseAgeScreen = ({ navigation }) => {
         { id: 9, label: '>50' },
     ];
 
+    const [selectedOption, setSelectedOption] = useState(
+        options.find(option => option.label === userData.age_range)?.id || null
+    );
+
     const handleOptionSelect = (id) => {
+        const selectedAge = options.find(option => option.id === id)?.label;
         setSelectedOption(id);
+        setUserData(prevState => {
+            const newState = { ...prevState, age_range: selectedAge };
+            return newState;
+        });
+    };
+
+    const handleContinue = () => {
+        navigation.navigate('Choose Genre');
     };
 
     return (
@@ -43,7 +57,7 @@ const ChooseAgeScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Choose Genre')}>Continue</MainButton>
+                <MainButton title="Continue" onPress={handleContinue}>Continue</MainButton>
             </View>
 
         </View>
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     buttonWrapper: {
-        width: '50%', 
+        width: '50%',
         paddingHorizontal: 5,
     },
     bottomContainer: {

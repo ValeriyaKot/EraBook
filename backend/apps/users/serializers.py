@@ -14,10 +14,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     birthday = serializers.DateField(required=False)
     country = serializers.CharField(required=False)
     gender = serializers.ChoiceField(choices=Profile.GENDER_CHOICES, required=False)
+    age_range = serializers.ChoiceField(choices=Profile.AGE_CHOICES, required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'full_name', 'phone_number', 'birthday', 'country', 'gender']
+        fields = ['username', 'email', 'password', 'full_name', 'phone_number', 'birthday', 'country', 'gender', 'age_range']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -26,10 +27,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         birthday = validated_data.pop('birthday', None)
         country = validated_data.pop('country', None)
         gender = validated_data.pop('gender', None)
+        age_range = validated_data.pop('age_range', None)
 
         user = User.objects.create_user(**validated_data)
         Profile.objects.create(
-            user=user, full_name=full_name, phone_number=phone_number, birthday=birthday, country=country, gender=gender
+            user=user, full_name=full_name, phone_number=phone_number, birthday=birthday, country=country, gender=gender, age_range=age_range
         )
         return user
 
