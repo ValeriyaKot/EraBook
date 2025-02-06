@@ -22,17 +22,20 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        full_name = validated_data.pop('full_name')
-        phone_number = validated_data.pop('phone_number')
-        birthday = validated_data.pop('birthday', None)
-        country = validated_data.pop('country', None)
-        gender = validated_data.pop('gender', None)
-        age_range = validated_data.pop('age_range', None)
+
+        profile_data = {
+            'full_name': validated_data.pop('full_name'),
+            'phone_number': validated_data.pop('phone_number'),
+            'birthday': validated_data.pop('birthday', None),
+            'country': validated_data.pop('country', None),
+            'gender': validated_data.pop('gender', None),
+            'age_range': validated_data.pop('age_range', None),
+        }
+
 
         user = User.objects.create_user(**validated_data)
-        Profile.objects.create(
-            user=user, full_name=full_name, phone_number=phone_number, birthday=birthday, country=country, gender=gender, age_range=age_range
-        )
+        Profile.objects.filter(user=user).update(**profile_data)
+
         return user
 
 class LoginSerializer(serializers.Serializer):

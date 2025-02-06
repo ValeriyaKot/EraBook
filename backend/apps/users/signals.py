@@ -7,7 +7,6 @@ User = get_user_model()
 
 
 @receiver(post_save, sender=User)
-def create_or_update_profile(sender, instance, created, **kwargs):
-    if created:
-        instance.profile = Profile.objects.create(user=instance)
-    instance.profile.save()
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and not hasattr(instance, 'profile'):  # Добавляем проверку
+        Profile.objects.create(user=instance)
