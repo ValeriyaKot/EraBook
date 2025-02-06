@@ -9,7 +9,7 @@ export const UserDataProvider = ({ children }) => {
     password: "",
     full_name: "",
     phone_number: "",
-    birth_date: "",
+    birthday: "",
     country: "",
     gender: "",
   });

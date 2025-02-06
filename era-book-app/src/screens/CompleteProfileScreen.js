@@ -1,26 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MainButton, TextInputField } from '../styles/GlobalStyles.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
+import { UserDataContext } from "../context/UserDataContext";
 
 
 
 const ChooseGenreScreen = ({ navigation }) => {
-    const [fullName, setFullName] = useState('');
-    const [number, setNumber] = useState('');
+    const { userData, setUserData } = useContext(UserDataContext);
+    const [full_name, setFullName] = useState('');
+    const [phone_number, setNumber] = useState('');
     const [country, setCountry] = useState('');
-    const [date, setDate] = useState(new Date());
+    const [birthday, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
-    const [inputDate, setInputDate] = useState(date.toLocaleDateString());
+    const [inputDate, setInputDate] = useState(birthday.toLocaleDateString());
 
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setOpen(false);
-        setDate(currentDate);
-        setInputDate(currentDate.toLocaleDateString());
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     };
+    
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || birthday;
+        setOpen(false);
+        setDate(formatDate(currentDate));
+        setInputDate(currentDate);
+        console.log(setDate, setInputDate)
+    };
+    
+
+    const handleContinue = () => {
+        setUserData({ 
+            ...userData, 
+            full_name, 
+            phone_number, 
+            birthday: formatDate(birthday),  
+            country 
+        });
+        navigation.navigate('Create Account'); 
+    };
+
+    useEffect(() => {
+        console.log('Updated userData:', userData);
+    }, [userData]); 
 
     return (
         <View style={styles.mainContainer}>
@@ -35,14 +61,14 @@ const ChooseGenreScreen = ({ navigation }) => {
                 <TextInputField
                     label={'Full name'}
                     placeholder="Enter your full name"
-                    value={fullName}
+                    value={full_name}
                     onChangeText={setFullName}
                 />
 
                 <TextInputField
                     label={'Phone number'}
                     placeholder="Enter your phone number"
-                    value={number}
+                    value={phone_number}
                     onChangeText={setNumber}
                 />
 
@@ -58,7 +84,7 @@ const ChooseGenreScreen = ({ navigation }) => {
                 </TextInputField>
                 {open && (
                     <DateTimePicker
-                        value={birthDate}
+                        value={birthday}
                         mode="date"
                         display="spinner"
                         onChange={onChange}
@@ -73,7 +99,7 @@ const ChooseGenreScreen = ({ navigation }) => {
                 />
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Create Account')}>Continue</MainButton>
+                <MainButton title="Continue" onPress={handleContinue}>Continue</MainButton>
             </View>
         </View>
     );

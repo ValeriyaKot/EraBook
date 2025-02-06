@@ -1,16 +1,14 @@
-// src/redux/authSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import apiClient from '../services/api'; // Импортируем apiClient
+import apiClient from '../services/api'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Асинхронный экшен для логина
+
 export const loginUser = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
-    const response = await apiClient.post('auth/login/', credentials); // Запрос на логин
+    const response = await apiClient.post('auth/login/', credentials); 
     const { access, refresh } = response.data;
 
-    // Сохраняем токены в AsyncStorage
+
     await AsyncStorage.setItem('accessToken', access);
     await AsyncStorage.setItem('refreshToken', refresh);
 
@@ -20,7 +18,20 @@ export const loginUser = createAsyncThunk('auth/login', async (credentials, { re
   }
 });
 
-// Slice для аутентификации
+export const registerUser = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
+    try {
+      const response = await apiClient.post('auth/register/', userData);
+      const { access, refresh } = response.data;
+  
+      await AsyncStorage.setItem('accessToken', access);
+      await AsyncStorage.setItem('refreshToken', refresh);
+  
+      return { access, refresh };
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'Ошибка регистрации');
+    }
+  });
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: { token: null, loading: false, error: null },
@@ -42,6 +53,19 @@ const authSlice = createSlice({
         state.token = action.payload.access;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload.access;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

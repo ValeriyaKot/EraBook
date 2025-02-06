@@ -23,46 +23,46 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <Provider store={store}>
-       <UserDataProvider>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="EraBook"
-          component={FirstScreen} />
-        <Stack.Screen
-          name="Choose Gender"
-          component={ChooseGenderScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Choose Age"
-          component={ChooseAgeScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Choose Genre"
-          component={ChooseGenreScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Complete Profile"
-          component={CompleteProfileScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Create Account"
-          component={CreateAccountScreen}
-          options={{ headerShown: true }}
-        />
-       <Stack.Screen
-            name="Login"
-            component={LoginScreen} 
-            options={{ headerShown: true }}
-          />
-      </Stack.Navigator>
-    </NavigationContainer>
-    </UserDataProvider>
+      <UserDataProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="EraBook"
+              component={FirstScreen} />
+            <Stack.Screen
+              name="Choose Gender"
+              component={ChooseGenderScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Choose Age"
+              component={ChooseAgeScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Choose Genre"
+              component={ChooseGenreScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Complete Profile"
+              component={CompleteProfileScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Create Account"
+              component={CreateAccountScreen}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerShown: true }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserDataProvider>
     </Provider>
   );
 };

@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MainButton, TextInputField } from '../styles/GlobalStyles.js';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../redux/AuthSlice';
+import { UserDataContext } from "../context/UserDataContext";
 
 
 const ChooseGenreScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const { userData, setUserData } = useContext(UserDataContext);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
-    const [date, setDate] = useState(new Date());
-    const [open, setOpen] = useState(false);
     const [secure, setSecure] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
-    const [inputDate, setInputDate] = useState(date.toLocaleDateString());
 
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setOpen(false);
-        setDate(currentDate);
-        setInputDate(currentDate.toLocaleDateString());
+    const handleSubmit = () => {
+        const updatedUserData = {
+            ...userData,
+            username,
+            email,
+            password
+        };
+
+        setUserData(updatedUserData);
+        dispatch(registerUser(updatedUserData));
     };
+
 
     return (
         <View style={styles.mainContainer}>
@@ -79,7 +86,7 @@ const ChooseGenreScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={() => navigation.navigate('Choose Genre')}>Sign Up</MainButton>
+                <MainButton title="Continue" onPress={handleSubmit}>Sign Up</MainButton>
             </View>
         </View>
     );

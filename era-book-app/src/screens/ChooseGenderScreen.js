@@ -26,9 +26,9 @@ const ChooseGenderScreen = ({ navigation }) => {
     const { userData, setUserData } = useContext(UserDataContext);
 
     const options = [
-        { id: 1, label: 'I am male', value: 'Male' },
-        { id: 2, label: 'I am female', value: 'Female' },
-        { id: 3, label: 'Rather not to say', value: 'Other' },
+        { id: 1, label: 'I am male', value: 'M' },
+        { id: 2, label: 'I am female', value: 'F' },
+        { id: 3, label: 'Rather not to say', value: 'O' },
     ];
 
     const [selectedOption, setSelectedOption] = useState(
