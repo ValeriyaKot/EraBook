@@ -1,37 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, View, Text, StyleSheet, ImageBackground } from 'react-native';
 
-const data = [
-    { id: '1', title: 'Item 1' },
-    { id: '2', title: 'Item 2' },
-    { id: '3', title: 'Item 3' },
-    { id: '4', title: 'Item 4' },
-    { id: '5', title: 'Item 5' },
-    { id: '6', title: 'Item 6' },
-    { id: '7', title: 'Item 7' },
-    { id: '8', title: 'Item 8' },
-    { id: '9', title: 'Item 9' },
-    { id: '10', title: 'Item 10' },
-
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGenres } from "../redux/BooksSlice.js";
 
 
 const GenreItem = () => {
+    const dispatch = useDispatch();
+    const { genres, status, error } = useSelector((state) => state.genres);
+    const BASE_URL = "http://192.168.100.4:8000";
 
+    useEffect(() => {
+        dispatch(fetchGenres()).then((response) => {
+            console.log("Fetched genres:", response.payload); // Лог данных
+            response.payload.forEach((genre) => {
+                console.log("Image URL:", `${BASE_URL}${genre.image}`);
+            });
+        });
+    }, [dispatch]);
 
     return (
         <View>
             <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                    <View style={styles.bookContainer}>
-                        <ImageBackground style={styles.imageContainer} source={require('../../assets/books.jpg')}>
+                data={genres}
+                renderItem={({ item }) => {
+                    const imageUrl = `${BASE_URL}/${item.image}`; // Добавил / перед media
 
-                            <Text style={styles.title}>{item.title}</Text>
-                        </ImageBackground>
+                    console.log("Loading image:", imageUrl); // Лог пути к изображению
 
-                    </View>
-                )}
+                    return (
+                        <View style={styles.bookContainer}>
+                            <ImageBackground style={styles.imageContainer} source={{ uri: imageUrl }} resizeMode="cover">
+                                <Text style={styles.title}>{item.name}</Text>
+                            </ImageBackground>
+                        </View>
+                    );
+                }}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#fff',
-        marginHorizontal: 5
+        margin: 5
 
     },
 

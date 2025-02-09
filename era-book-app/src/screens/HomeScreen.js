@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Image, Text, FlatList, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+
+
 import Ionicons from '@expo/vector-icons/Ionicons';
 import BookItem from '../components/BookItem.jsx';
 import GenreItem from '../components/GenreItem.jsx';
+
 
 
 
