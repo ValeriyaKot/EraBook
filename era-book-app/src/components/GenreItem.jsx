@@ -11,12 +11,7 @@ const GenreItem = () => {
     const BASE_URL = "http://192.168.100.4:8000";
 
     useEffect(() => {
-        dispatch(fetchGenres()).then((response) => {
-            console.log("Fetched genres:", response.payload); // Лог данных
-            response.payload.forEach((genre) => {
-                console.log("Image URL:", `${BASE_URL}${genre.image}`);
-            });
-        });
+        dispatch(fetchGenres());
     }, [dispatch]);
 
     return (
