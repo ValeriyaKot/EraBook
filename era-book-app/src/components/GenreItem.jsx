@@ -19,13 +19,10 @@ const GenreItem = () => {
             <FlatList
                 data={genres}
                 renderItem={({ item }) => {
-                    const imageUrl = `${BASE_URL}/${item.image}`; // Добавил / перед media
-
-                    console.log("Loading image:", imageUrl); // Лог пути к изображению
 
                     return (
                         <View style={styles.bookContainer}>
-                            <ImageBackground style={styles.imageContainer} source={{ uri: imageUrl }} resizeMode="cover">
+                            <ImageBackground style={styles.imageContainer} source={{ uri: `${BASE_URL}/${item.image}` }} resizeMode="cover">
                                 <Text style={styles.title}>{item.name}</Text>
                             </ImageBackground>
                         </View>

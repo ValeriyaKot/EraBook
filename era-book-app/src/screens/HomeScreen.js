@@ -7,8 +7,6 @@ import BookItem from '../components/BookItem.jsx';
 import GenreItem from '../components/GenreItem.jsx';
 
 
-
-
 const { width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
@@ -51,7 +49,15 @@ const HomeScreen = ({ navigation }) => {
                 </View>
 
                 <View style={{ marginVertical: 10 }}>
-                    <BookItem />
+                    <BookItem>
+                        <View style={styles.detailsContainer} >
+                            <Ionicons name="star-half" size={14} color="#A8AEB1" />
+                            <Text style={styles.text}>4.8</Text>
+                            <Ionicons name="logo-usd" size={14} color="#A8AEB1" />
+                            <Text style={styles.text}>45</Text>
+                        </View>
+                    </BookItem>
+
                 </View>
 
 
@@ -82,10 +88,14 @@ const styles = StyleSheet.create({
 
     },
     text: {
-        fontSize: 16,
-        textAlign: 'center',
-        margin: 20,
-        color: '#333',
+        marginRight: 10,
+        color: '#A8AEB1'
+    },
+    detailsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        marginVertical: 5
     },
 
 });

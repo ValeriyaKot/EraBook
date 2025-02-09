@@ -17,7 +17,7 @@ const data = [
 ];
 
 
-const BookItem = () => {
+const BookItem = ({ children }) => {
 
 
     return (
@@ -29,15 +29,8 @@ const BookItem = () => {
                         <Image style={styles.imageContainer} source={require('../../assets/books.jpg')} />
                         <View style={{ marginVertical: 10 }}>
                             <Text style={styles.title}>Art&Museum sjhfkdjhfasdbm,nfds</Text>
-                            <View style={styles.detailsContainer} >
-                                <Ionicons name="star-half" size={14} color="#A8AEB1" />
-                                <Text style={styles.text}>4.8</Text>
-                                <Ionicons name="logo-usd" size={14} color="#A8AEB1" />
-                                <Text style={styles.text}>45</Text>
-
-
-                            </View>
-
+                            {children} 
+                           
                         </View>
                     </View>
                 )}
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
 
     bookContainer: {
         width: 150,
-        height: 280,
+        height: 'auto',
         marginHorizontal: 10,
         justifyContent: 'flex-start',
     },
