@@ -29,7 +29,6 @@ const ChooseGenreScreen = ({ navigation }) => {
         setOpen(false);
         setDate(formatDate(currentDate));
         setInputDate(currentDate);
-        console.log(setDate, setInputDate)
     };
     
 

@@ -13,6 +13,8 @@ import ChooseGenreScreen from './src/screens/ChooseGenreScreen.js';
 import CompleteProfileScreen from './src/screens/CompleteProfileScreen.js'
 import CreateAccountScreen from './src/screens/CreateAccountScreen.js'
 import LoginScreen from './src/screens/LoginScreen.js';
+import HomeScreen from './src/screens/HomeScreen.js';
+
 import { UserDataProvider } from "./src/context/UserDataContext";
 
 
@@ -58,6 +60,11 @@ const App = () => {
             <Stack.Screen
               name="Login"
               component={LoginScreen}
+              options={{ headerShown: true }}
+            />
+             <Stack.Screen
+              name="Home"
+              component={HomeScreen}
               options={{ headerShown: true }}
             />
           </Stack.Navigator>

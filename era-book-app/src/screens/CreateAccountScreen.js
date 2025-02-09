@@ -30,13 +30,11 @@ const ChooseGenreScreen = ({ navigation }) => {
         dispatch(registerUser(updatedUserData));
     };
 
-
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
                 <Text style={styles.title}>Create an account</Text>
                 <Text style={styles.text}>Enter your username, email & password. If you forget it, then you have to do forgot password</Text>
-
 
                 <TextInputField
                     label={'Username'}
@@ -86,7 +84,7 @@ const ChooseGenreScreen = ({ navigation }) => {
 
             </View>
             <View style={styles.bottomContainer}>
-                <MainButton title="Continue" onPress={handleSubmit}>Sign Up</MainButton>
+                <MainButton title="Continue" onPress={() => { navigation.navigate("Home") }}>Sign Up</MainButton>
             </View>
         </View>
     );
