@@ -6,8 +6,8 @@ class GenreSerializer(serializers.ModelSerializer):
         model = Genre
         fields = '__all__' 
 
-    def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image:
-            return request.build_absolute_uri(obj.image.url)
-        return None
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        if rep['image']:  
+            rep['image'] = instance.image.url  
+        return rep

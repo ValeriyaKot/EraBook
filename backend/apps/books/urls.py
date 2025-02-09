@@ -8,4 +8,4 @@ router = DefaultRouter()
 router.register('genres', GenreViewSet, basename='genres')
 
 
-urlpatterns = router.urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = router.urls
